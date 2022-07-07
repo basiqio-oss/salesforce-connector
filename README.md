@@ -1,4 +1,4 @@
-![GitHub](https://img.shields.io/github/license/basqio/salesforce-connector)
+![GitHub](https://img.shields.io/github/license/basiqio-oss/salesforce-connector)
 
 # Update
 This project is being Open Sourced as Basiq wish to share this code as a starting point for any Salesforce developers to take on and integrate with their Salesforce instance and use the modified app to consume services from the Basiq platform - https://api.basiq.io/reference/introduction
