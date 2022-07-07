@@ -1,0 +1,21 @@
+{
+  "trailingComma": "none",
+  "printWidth": 300,
+  "tabWidth": 4,
+  "proseWrap": "preserve",
+  "arrowParens": "always",
+  "singleQuote": false,
+  "jsxBracketSameLine": true,
+  "useTabs": true,
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "**/lwc/**/*.html",
+      "options": { "parser": "lwc" }
+    },
+    {
+      "files": "*.{cmp,page,component}",
+      "options": { "parser": "html" }
+    }
+  ]
+}

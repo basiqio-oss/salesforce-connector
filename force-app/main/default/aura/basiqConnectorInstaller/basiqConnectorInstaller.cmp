@@ -1,0 +1,126 @@
+<aura:component controller="BasiqConnectorInstallerController" implements="force:appHostable">
+	<aura:handler name="init" value="{! this }" action="{! c.init }" />
+	<aura:handler name="confirmEvent" event="c:confirmEvent" action="{!c.handleConfirmed}" />
+
+	<lightning:navigation aura:id="navService" />
+
+	<aura:attribute name="installerSteps" type="List" />
+	<aura:attribute name="currentStep" type="Object" />
+	<aura:attribute name="nextEnabled" type="Boolean" default="true" />
+	<aura:attribute name="leadEmailOptions" type="List" default="[]" />
+	<aura:attribute name="leadMobileOptions" type="List" default="[]" />
+	<aura:attribute name="contactEmailOptions" type="List" default="[]" />
+	<aura:attribute name="contactMobileOptions" type="List" default="[]" />
+	<aura:attribute name="errorModalOpen" type="Boolean" default="false" />
+	<aura:attribute name="errorMessage" type="String" default="" />
+	<aura:attribute name="confirmModalOpen" type="Boolean" default="false" />
+	<aura:attribute name="confirmModalTitle" type="String" default="Update your API key?" />
+	<aura:attribute
+		name="confirmModalMessage"
+		type="String"
+		default="Updating your API key will require you to re-enter the same preferences you provided during initial set up.&lt;br/&gt;&lt;br/&gt;To maintain access to existing Basiq data (including customer consents), you should ensure you generate a &lt;b&gt;new API key via the Basiq Dashboard for the same Application&lt;/b&gt;. For support or queries contact support@basiq.io."
+	/>
+	<aura:attribute name="accountPageURL" type="String" />
+	<aura:attribute name="accountPageReference" type="Object" />
+	<aura:attribute name="checkOptions" type="List" default="[{'label': 'Allow Basiq to update Leads and Contacts in Salesforce?', 'value': 'option1'},]" />
+	<aura:attribute name="checkValue" type="List" default="" />
+	<aura:attribute name="apiKeyStored" type="Boolean" default="true" />
+	<aura:attribute name="apiKeyChecked" type="Boolean" default="false" />
+
+	<lightning:layout class="slds-page-header slds-page-header--object-home">
+		<img class="basiq-icon" src="/resource/Basiq_Connector__basiqIcon" alt="B" />
+		<lightning:layoutItem padding="horizontal-small">
+			<div class="page-section page-header">
+				<h1 class="slds-text-heading--label">BASIQ FOR SALESFORCE</h1>
+				<h2 class="slds-text-heading--medium">Install</h2>
+			</div>
+		</lightning:layoutItem>
+	</lightning:layout>
+
+	<div class="content">
+		<div class="content-inner">
+			<div class="progressBar">
+				<lightning:progressIndicator currentStep="{! v.currentStep.value }" type="path" variant="base">
+					<aura:iteration items="{! v.installerSteps }" var="step">
+						<lightning:progressStep label="{! step.label }" value="{! step.value }" />
+					</aura:iteration>
+				</lightning:progressIndicator>
+			</div>
+
+			<div class="description">
+				<div class="arrow-cicle-wrapper">
+					<div>
+						<i class="arrow right"></i>
+					</div>
+					<div id="step-circle" class="step-cicle">1</div>
+				</div>
+				<div class="title-text-wrapper">
+					<div id="step-title" class="step-title">Authenticate</div>
+					<div id="step-text" class="step-text">
+						Prior to installation, <a href="https://dashboard.basiq.io/register" target="_blank">sign-up</a> to Basiq via our Dashboard - to generate a new and unique API key.<br /> Your API key carries many privileges, so be sure to keep it secret!
+					</div>
+				</div>
+				<div class="img-wrapper">
+					<img id="step-img" src="/resource/Basiq_Connector__step1" />
+				</div>
+			</div>
+
+			<aura:if isTrue="{!v.currentStep.index == 0}">
+				<form>
+					<lightning:input aura:id="basiqapikeyform" placeholder="{!v.apiKeyStored &amp;&amp; v.apiKeyChecked ? 'API key set' : 'API key'}" label="Basiq API key" name="basiqapikey" onchange="{!c.handleAPIKeyInput}" disabled="{!v.apiKeyStored}" />
+				</form>
+				<aura:if isTrue="{!v.apiKeyStored &amp;&amp; v.apiKeyChecked}">
+					<lightning:button class="slds-m-top_x-small" label="Update API key" title="Update API key" onclick="{!c.handleEdit}" />
+				</aura:if>
+			</aura:if>
+
+			<aura:if isTrue="{!v.currentStep.index == 1}">
+				<form class="slds-form--stacked">
+					<div>
+						<div class="header-column">
+							<div class="field-title" title="Salesforce Lead Field">
+								<img src="/resource/Basiq_Connector__sfcontact" />
+								Salesforce Lead Field
+							</div>
+							<div class="field-title" title="Salesforce Contact Field">
+								<img src="/resource/Basiq_Connector__sflead" />
+								Salesforce Contact Field
+							</div>
+							<div class="field-title" title="Basiq Field">Basiq Field</div>
+						</div>
+						<div class="fields-wrapper">
+							<div class="input-wrapper">
+								<lightning:combobox aura:id="emailLead" name="emailLead" label="" placeholder="Select an Option" options="{!v.leadEmailOptions}" onchange="{!c.handleMappingInput}" />
+								<lightning:combobox aura:id="mobileLead" name="mobileLead" label="" placeholder="Select an Option" options="{!v.leadMobileOptions}" onchange="{!c.handleMappingInput}" />
+							</div>
+							<div class="input-wrapper">
+								<lightning:combobox aura:id="emailContact" name="emailContact" label="" placeholder="Select an Option" options="{!v.contactEmailOptions}" onchange="{!c.handleMappingInput}" />
+								<lightning:combobox aura:id="mobileContact" name="mobileContact" label="" placeholder="Select an Option" options="{!v.contactMobileOptions}" onchange="{!c.handleMappingInput}" />
+							</div>
+							<div class="input-wrapper">
+								<div class="email-text"><i class="arrow right"></i> email</div>
+								<div class="mobile-text"><i class="arrow right"></i> mobile</div>
+							</div>
+						</div>
+						<div class="checkbox-wrapper">
+							<lightning:checkboxGroup aura:id="changePer" name="Checkbox Group Required" label="" options="{! v.checkOptions }" value="{! v.checkValue }" onchange="{!c.handleMappingInput}" />
+						</div>
+					</div>
+				</form>
+			</aura:if>
+		</div>
+		<div class="navigation">
+			<aura:if isTrue="{!v.currentStep.index gt 0}">
+				<lightning:button label="Cancel" title="Cancel action" onclick="{!c.handleCancel}" />
+			</aura:if>
+			<aura:if isTrue="{!v.currentStep.index lt 2}">
+				<lightning:button class="next-button" variant="brand" label="Next" title="Next action" disabled="{!v.nextEnabled}" onclick="{!c.handleNext}" />
+			</aura:if>
+			<aura:if isTrue="{!v.currentStep.index == 2}">
+				<lightning:button class="finish-button" variant="brand" label="Finish" title="Finish" onclick="{!c.handleFinish}" />
+			</aura:if>
+		</div>
+	</div>
+	<c:confirmPopUpModal isModalOpen="{!v.confirmModalOpen}" title="{!v.confirmModalTitle}" message="{!v.confirmModalMessage}" okKey="Update API key"></c:confirmPopUpModal>
+	<c:errorPopUpModal isModalOpen="{!v.errorModalOpen}" message="{!v.errorMessage}"></c:errorPopUpModal>
+</aura:component>

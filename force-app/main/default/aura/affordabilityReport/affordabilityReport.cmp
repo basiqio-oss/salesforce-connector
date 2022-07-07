@@ -1,0 +1,27 @@
+<aura:component>
+	<aura:attribute name="parent" type="Aura.Component" required="true" />
+	<aura:attribute name="generateInProgress" type="Boolean" default="false" />
+
+	<div>
+		<div class="container-bottomless height-large">
+			<lightning:layout horizontalAlign="spread">
+				<lightning:layoutItem class="center-vertically padding-bottom-xxsmall padding-left-small padding-right-small">
+					<lightning:icon class="icon-default" iconName="utility:chart" size="x-small"></lightning:icon>
+				</lightning:layoutItem>
+				<lightning:layoutItem class="center-vertically padding-bottom-xxsmall multiline-truncate" flexibility="grow">
+					<div class="header-title center-vertically multiline-truncate">Affordability report</div>
+				</lightning:layoutItem>
+				<lightning:layoutItem class="center-vertically padding-bottom-xxsmall padding-right-small">
+					<lightning:layout horizontalAlign="spread">
+						<lightning:layoutItem class="padding-right-xsmall">
+							<lightning:button class="button-fixed" variant="brand" label="Download PDF" title="Download PDF" onclick="{!c.handlePDFAffordabilityReport}" disabled="{!v.generateInProgress}" />
+						</lightning:layoutItem>
+						<lightning:layoutItem>
+							<lightning:button class="button-fixed" variant="brand" label="Generate Insights" title="Generate Insights" onclick="{!c.handleGenerateAffordabilityReport}" disabled="{!v.generateInProgress}" />
+						</lightning:layoutItem>
+					</lightning:layout>
+				</lightning:layoutItem>
+			</lightning:layout>
+		</div>
+	</div>
+</aura:component>

@@ -1,0 +1,220 @@
+.THIS.content {
+	background-color: white;
+	height: 70vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.THIS .content-inner {
+	display: flex;
+	padding: 32px 140px 0;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1280px;
+	width: 100%;
+	height: 100%;
+}
+
+.THIS .basiq-icon {
+	width: 36px;
+	height: 36px;
+}
+
+.THIS .content-inner form {
+	width: 100%;
+}
+
+.THIS .progressBar {
+	pointer-events: none;
+	display: flex;
+	justify-content: center;
+}
+
+.THIS .progressBar .slds-grid {
+	min-width: 600px;
+}
+
+.THIS .description {
+	display: flex;
+	font-family: Salesforce Sans;
+	font-style: normal;
+	border-bottom: 1px solid #dddbda;
+	margin: 32px 0 32px 5px;
+	padding-bottom: 32px;
+	width: 100%;
+}
+
+.THIS .arrow-cicle-wrapper {
+	display: flex;
+}
+
+.THIS .arrow-cicle-wrapper div:first-child {
+	padding-right: 12px;
+}
+
+.THIS .step-cicle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 5px solid #dddbda;
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+}
+
+.THIS .title-text-wrapper {
+	display: flex;
+	flex-direction: column;
+	padding-left: 12px;
+	padding-top: 6px;
+}
+
+.THIS .img-wrapper {
+	margin-left: auto;
+}
+
+.THIS .step-title {
+	font-weight: bold;
+	font-size: 16px;
+	color: #2b2826;
+}
+
+.THIS .step-text {
+	font-weight: normal;
+	font-size: 13px;
+	color: #3e3e3c;
+	padding-top: 9px;
+	max-width: 840px;
+}
+
+.THIS .step-text p,
+.THIS .step-text label {
+	color: #006dcc;
+}
+
+.THIS .step-text a {
+	cursor: pointer;
+}
+
+.THIS .apiKeyForm {
+	font-family: Salesforce Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.THIS .navigation {
+	background: #f3f2f2;
+	display: flex;
+	height: 48px;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	margin-top: auto;
+	width: 100%;
+}
+
+.THIS .navigation button {
+	height: 32px;
+}
+
+.THIS .slds-input::placeholder {
+	color: #706e6b;
+}
+.THIS .header-column {
+	background: #f3f2f2;
+	display: flex;
+	width: 100%;
+	height: 38px;
+	align-items: center;
+}
+
+.THIS .field-title {
+	display: flex;
+	align-items: center;
+	font-family: Salesforce Sans;
+	font-weight: bold;
+	font-size: 13px;
+	color: #514f4d;
+}
+
+.THIS .field-title:first-child,
+.THIS .field-title:nth-child(2) {
+	padding-left: 16px;
+	width: 30%;
+}
+
+.THIS .field-title:last-child {
+	margin-left: auto;
+	margin-right: 97px;
+}
+
+.THIS .field-title img {
+	padding-right: 10px;
+}
+
+.THIS .fields-wrapper {
+	display: flex;
+	width: 100%;
+}
+
+.THIS .input-wrapper:first-child,
+.THIS .input-wrapper:nth-child(2) {
+	width: 30%;
+}
+
+.THIS .input-wrapper:last-child {
+	margin: 25px 118px 0 auto;
+}
+
+.THIS .input-wrapper .slds-form-element {
+	padding-left: 16px;
+	padding-right: 13px;
+}
+
+.THIS .email-text {
+	font-family: Salesforce Sans;
+	font-size: 13px;
+	color: #006dcc;
+}
+
+.THIS .mobile-text {
+	font-family: Salesforce Sans;
+	font-size: 13px;
+	color: #006dcc;
+	margin-top: 35px;
+}
+
+.THIS .checkbox-wrapper {
+	padding-top: 38px;
+}
+
+.THIS .arrow {
+	border: solid black;
+	border-width: 0 1px 1px 0;
+	display: inline-block;
+	padding: 3px;
+}
+
+.THIS .right {
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+}
+
+.THIS .email-text .right,
+.THIS .mobile-text .right {
+	margin-right: 32px;
+}
+
+.THIS .next-button,
+.THIS .finish-button {
+	margin-left: 8px;
+}
+
+@media only screen and (max-width: 1280) {
+	.THIS.content {
+		padding: 32px 60px 0;
+	}
+}

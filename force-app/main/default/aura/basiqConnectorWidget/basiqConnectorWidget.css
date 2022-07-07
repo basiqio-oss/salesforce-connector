@@ -1,0 +1,359 @@
+.THIS {
+	background-color: white;
+}
+
+.THIS.url-wrapper {
+	background-color: #f3f2f2;
+	padding-bottom: 10px;
+}
+
+.THIS.url-wrapper lightning-input {
+	margin-bottom: -8px;
+}
+
+.THIS.url-wrapper label {
+	font-family: Salesforce Sans;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 11px;
+	padding-left: 11px;
+	color: #514f4d;
+}
+
+.THIS .slds-input {
+	border: 1px solid #dddbda;
+}
+
+.THIS.widget-page-header {
+	background: #f3f2f2;
+	border-radius: 4px 4px 0px 0px;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+.THIS.widget-page-header img {
+	width: 36px;
+	height: 36px;
+}
+
+.THIS.widget-page-header .slds-text-heading--medium {
+	font-family: Salesforce Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	color: #080707;
+}
+
+.THIS input {
+	width: 95%;
+	margin-left: 2%;
+	margin-bottom: 2%;
+}
+
+.THIS input:read-only {
+	background: white;
+}
+
+.THIS .table-wrapper {
+	height: 250px;
+}
+
+.THIS .table-wrapper table {
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+	width: 100%;
+}
+
+.THIS .table-wrapper.empty-content {
+	height: 450px;
+}
+
+.THIS .table-head {
+	background: #f3f2f2;
+	width: 100%;
+	height: 30px;
+	border-bottom: 1px solid #dddbda;
+	display: flex;
+	align-items: center;
+}
+
+.THIS .table-head th {
+	font-family: Salesforce Sans;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 13px;
+	color: #514f4d;
+	height: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.THIS .table-head th:first-child {
+	width: 7%;
+	justify-content: center;
+	padding-left: 2%;
+}
+
+.THIS .table-head th:first-child input {
+	width: 16px;
+	height: 16px;
+}
+
+/* TODO check */
+.THIS .arrow {
+	border: solid #706e6b;
+	border-width: 0 2px 2px 0;
+	display: inline-block;
+	padding: 3px;
+	margin-left: 7px;
+	cursor: pointer;
+}
+
+.THIS .up {
+	transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+	margin-bottom: -2px;
+}
+
+/* TODO check */
+.THIS .down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	margin-bottom: 2px;
+}
+
+.THIS .check-box-modded {
+	height: inherit;
+}
+
+.THIS .header-title {
+	font-family: Salesforce Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	color: #080707;
+}
+
+.THIS .table-body {
+	flex: 1 1 auto;
+	display: block;
+	overflow-y: auto;
+}
+
+.THIS .table-body td {
+	font-family: Salesforce Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 13px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.THIS .table-body td img {
+	width: 22px;
+	height: 22px;
+}
+
+.THIS .content-label {
+	padding-left: 5px;
+	padding-top: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+}
+
+.THIS .table-body tr td:first-child {
+	width: 7%;
+	display: flex;
+	justify-content: center;
+	padding-left: 2%;
+}
+
+.THIS .table-body tr td:nth-child(2) {
+	width: 45%;
+}
+
+.THIS .table-head th:nth-child(2) {
+	width: 45%;
+}
+
+.THIS .table-body tr td:last-child {
+	width: 30%;
+	padding-right: 12px;
+	margin-left: auto;
+	text-align: right;
+	justify-content: right;
+}
+
+.THIS .table-body tr td:last-child label {
+	width: 150px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: right;
+}
+
+.THIS .table-body tr {
+	border-bottom: 1px solid #dddbda;
+	width: 100%;
+	height: 30px;
+}
+
+.THIS .table-head,
+.THIS .table-body tr {
+	display: flex;
+	table-layout: fixed;
+}
+
+.THIS .table-head th:last-child {
+	width: 30%;
+	padding-right: 4px;
+	margin-left: auto;
+	justify-content: right;
+}
+
+.THIS .table-body tr td:first-child input {
+	width: 16px;
+	height: 16px;
+}
+
+.THIS .table-body-empty-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0 13%;
+	font-family: Salesforce Sans;
+	font-style: normal;
+	font-weight: normal;
+	color: #3e3e3c;
+}
+
+.THIS .table-body-empty-content img {
+	width: 100px;
+	height: 100px;
+}
+
+.THIS .empty-content-header {
+	font-size: 20px;
+}
+
+.THIS .empty-content-title {
+	font-size: 13px;
+	padding-top: 12px;
+}
+
+.THIS .hidden {
+	display: none;
+}
+
+.THIS [class^="column-"],
+.THIS [class*=" column-"] {
+	color: #ffb75d;
+}
+
+.THIS .column-active {
+	color: #04844b;
+}
+
+.THIS .column-invalid,
+.THIS [class*="column-"][class*="failed"],
+.THIS [class*="column-"][class*="thrown"] {
+	color: #c23934;
+}
+
+.THIS .slds-input[readonly] {
+	padding-left: 12px;
+}
+
+.THIS .status-icon-active svg {
+	margin-right: 4px;
+	fill: #04844b;
+}
+
+.THIS .status-icon-warning svg {
+	margin-right: 4px;
+	fill: #ffb75d;
+}
+
+.THIS .status-icon-invalid svg {
+	margin-right: 4px;
+	fill: #c23934;
+}
+
+.THIS .minimize-icon {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+}
+
+.THIS .center-vertically {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.THIS .icon-default svg {
+	fill: #0075dc;
+}
+
+.THIS.widget-page-container {
+	border-radius: 0px 0px 4px 4px;
+}
+
+.THIS .container-body {
+	width: 100%;
+	padding: 6px 0px 6px 0px;
+	box-shadow: 0px 1px 0px #dddbda;
+	border-top: 1px solid #dddbda;
+	border-bottom: 1px solid #dddbda;
+}
+
+.THIS .button-fixed {
+	height: 31.6px;
+	line-height: 12px;
+}
+
+.THIS .height-large {
+	height: 45.2px;
+}
+
+.THIS .padding-left-small {
+	padding-left: 12px;
+}
+
+.THIS .padding-right-small {
+	padding-right: 12px;
+}
+
+.THIS .padding-left-xsmall {
+	padding-left: 6px;
+}
+
+.THIS .padding-right-xsmall {
+	padding-right: 6px;
+}
+
+.THIS .padding-bottom-xxsmall {
+	padding-bottom: 2px;
+}
+
+.THIS .padding-top-xsmall {
+	padding-top: 6px;
+}
+
+.THIS .padding-top-xxsmall {
+	padding-top: 4px;
+}
+
+.THIS .multiline-truncate {
+	line-height: 16px;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

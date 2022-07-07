@@ -1,0 +1,6 @@
+.THIS .container-bottomless {
+	width: 100%;
+	padding: 6px 0px 6px 0px;
+	box-shadow: 0px 1px 0px #dddbda;
+	border-top: 1px solid #dddbda;
+}

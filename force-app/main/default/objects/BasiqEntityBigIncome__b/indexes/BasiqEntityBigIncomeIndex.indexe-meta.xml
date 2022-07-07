@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Index xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BasiqEntityBigIncomeIndex</fullName>
+    <fields>
+        <name>BasiqAffordabilityId__c</name>
+        <sortDirection>ASC</sortDirection>
+    </fields>
+    <fields>
+        <name>BasiqIncomeId__c</name>
+        <sortDirection>ASC</sortDirection>
+    </fields>
+    <label>BasiqEntityBigIncomeIndex</label>
+</Index>

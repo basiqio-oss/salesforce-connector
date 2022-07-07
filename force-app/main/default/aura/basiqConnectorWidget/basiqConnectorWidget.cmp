@@ -1,0 +1,156 @@
+<aura:component access="global" implements="force:hasRecordId,force:hasSObjectName,flexipage:availableForRecordHome" controller="BasiqConnectorWidgetController">
+	<aura:handler name="init" value="{! this }" action="{! c.init }" />
+
+	<aura:attribute name="buttonCreateLabel" type="String" default="Create Link" />
+	<aura:attribute name="buttonCreateIcon" type="String" default="utility:add" />
+	<aura:attribute name="connectLinkVisible" type="String" default="slds-hide" />
+	<aura:attribute name="connectLinkValue" type="String" default="Link not created" />
+	<aura:attribute name="connectLinkDisabled" type="Boolean" default="true" />
+	<aura:attribute name="errorModalOpen" type="Boolean" default="false" />
+	<aura:attribute name="errorMessage" type="String" default="" />
+	<aura:attribute name="errorTitle" type="String" default="" />
+	<aura:attribute name="connectionList" type="List" default="[]" />
+	<aura:attribute name="retrieveConnectionsInProgress" type="Boolean" default="false" />
+	<aura:attribute name="refreshConnectionsInProgress" type="List" default="[]" />
+	<aura:attribute name="minimizeIconName" type="String" default="utility:contract_alt" />
+	<aura:attribute name="minimizeClassName" type="String" default="slds-show" />
+	<aura:attribute name="connectionSortingColumn" type="Integer" default="0" />
+	<aura:attribute name="connectionSortingAscending" type="Boolean" default="true" />
+
+	<lightning:layout class="slds-page-header slds-page-header--object-home widget-page-header">
+		<img class="center-vertically" src="/resource/Basiq_Connector__basiqIcon" alt="B" />
+		<lightning:layoutItem padding="horizontal-small">
+			<div class="page-section page-header">
+				<h1 class="slds-text-heading--label">Basiq</h1>
+				<h2 class="slds-text-heading--medium">Manage connection</h2>
+			</div>
+		</lightning:layoutItem>
+		<lightning:buttonIcon class="minimize-icon center-vertically" iconName="{!v.minimizeIconName}" variant="container" size="large" onclick="{!c.handleMinimizeClick}"></lightning:buttonIcon>
+	</lightning:layout>
+
+	<div class="{!v.minimizeClassName}">
+		<div class="container-body height-large">
+			<lightning:layout horizontalAlign="spread">
+				<lightning:layoutItem class="center-vertically padding-bottom-xxsmall padding-left-small padding-right-small">
+					<lightning:icon class="icon-default" iconName="utility:link" size="x-small"></lightning:icon>
+				</lightning:layoutItem>
+				<lightning:layoutItem class="center-vertically padding-bottom-xxsmall multiline-truncate" flexibility="grow">
+					<div class="header-title center-vertically multiline-truncate">Request consent</div>
+				</lightning:layoutItem>
+				<lightning:layout horizontalAlign="end">
+					<lightning:layoutItem class="{!'padding-right-xsmall ' + v.connectLinkVisible}">
+						<lightning:button class="button-fixed" variant="neutral" label="Copy" title="" onclick="{!c.handleCopyLink}" />
+					</lightning:layoutItem>
+					<lightning:layoutItem class="{!'padding-right-xsmall ' + v.connectLinkVisible}">
+						<lightning:button class="button-fixed" variant="neutral" label="Disable" title="" onclick="{!c.handleDeleteLink}" />
+					</lightning:layoutItem>
+					<lightning:layoutItem class="padding-right-small">
+						<lightning:button class="button-fixed" variant="brand" label="{!v.buttonCreateLabel}" iconName="{!v.buttonCreateIcon}" title="" onclick="{!c.handleCreateLink}" />
+					</lightning:layoutItem>
+				</lightning:layout>
+			</lightning:layout>
+		</div>
+	</div>
+
+	<div class="{!'url-wrapper ' + v.minimizeClassName}">
+		<lightning:input aura:id="basiqConnectorLink" label="" name="basiqConnectorLink" readonly="true" variant="standard" value="{!v.connectLinkValue}" disabled="{!v.connectLinkDisabled}" />
+		<label>Share this link to initiate consent capture.</label>
+	</div>
+
+	<div class="{!v.minimizeClassName}">
+		<c:affordabilityReport parent="{!this}" />
+	</div>
+
+	<div class="widget-page-container">
+		<div class="container-body height-large">
+			<lightning:layout horizontalAlign="spread">
+				<lightning:layout horizontalAlign="start">
+					<lightning:layoutItem class="center-vertically padding-bottom-xxsmall" padding="horizontal-small">
+						<lightning:icon class="icon-default" iconName="utility:copy_to_clipboard" size="x-small"></lightning:icon>
+					</lightning:layoutItem>
+					<div class="header-title center-vertically">Consents</div>
+				</lightning:layout>
+				<lightning:layout horizontalAlign="end">
+					<lightning:layoutItem>
+						<lightning:button
+							class="button-fixed refresh-button"
+							variant="neutral"
+							label="{!(v.retrieveConnectionsInProgress || not(empty(v.refreshConnectionsInProgress))) ? 'Refreshing' : 'Refresh'}"
+							title=""
+							onclick="{!c.handleRefreshClick}"
+							disabled="{!v.retrieveConnectionsInProgress || not(empty(v.refreshConnectionsInProgress))}"
+						/>
+					</lightning:layoutItem>
+					<lightning:layoutItem class="padding-left-xsmall padding-right-small">
+						<lightning:button class="button-fixed" variant="destructive-text" label="Revoke" title="" onclick="{!c.handleRevokeClick}" />
+					</lightning:layoutItem>
+				</lightning:layout>
+			</lightning:layout>
+		</div>
+		<div class="table-wrapper" id="table-wrapper">
+			<table>
+				<thead id="table-head" class="table-head">
+					<th><lightning:input class="check-box-modded padding-top-xxsmall" type="checkbox" aura:id="main-checkbox" onchange="{!c.handleMainCheckBoxClick}" /></th>
+					<th>
+						Institution<lightning:buttonIcon
+							aura:id="0"
+							class="center-vertically"
+							iconName="{!(v.connectionSortingColumn == 0) ? v.connectionSortingAscending ? 'utility:chevrondown' : 'utility:chevronup' : 'utility:dash'}"
+							variant="container"
+							size="large"
+							onclick="{!c.handleInstitutionArrowClick}"
+						></lightning:buttonIcon>
+					</th>
+					<th>
+						Status<lightning:buttonIcon
+							aura:id="1"
+							class="center-vertically"
+							iconName="{!(v.connectionSortingColumn == 1) ? v.connectionSortingAscending ? 'utility:chevrondown' : 'utility:chevronup' : 'utility:dash'}"
+							variant="container"
+							size="large"
+							onclick="{!c.handleInstitutionArrowClick}"
+						></lightning:buttonIcon>
+					</th>
+					<th>
+						Last used<lightning:buttonIcon
+							aura:id="2"
+							class="center-vertically"
+							iconName="{!(v.connectionSortingColumn == 2) ? v.connectionSortingAscending ? 'utility:chevrondown' : 'utility:chevronup' : 'utility:dash'}"
+							variant="container"
+							size="large"
+							onclick="{!c.handleInstitutionArrowClick}"
+						></lightning:buttonIcon>
+					</th>
+				</thead>
+				<tbody class="table-body" id="table-body">
+					<aura:iteration items="{!v.connectionList}" var="connection" indexVar="index">
+						<tr>
+							<td><lightning:input class="check-box-modded padding-top-xsmall" type="checkbox" value="{!connection.id}" aura:id="connections" /></td>
+							<td><img src="{!connection.logo}" /><label class="content-label" title="{!connection.institution}">{!connection.institution}</label></td>
+							<aura:if isTrue="{!connection.status == 'Active'}">
+								<td class="column-active"><lightning:icon class="status-icon-active" iconName="utility:success" size="xx-small"></lightning:icon><label>{!connection.status}</label></td>
+								<aura:set attribute="else">
+									<aura:if isTrue="{!connection.status == 'Invalid' || connection.status == 'Script-thrown exception' || connection.status == 'verify-credentials:failed'}">
+										<td class="column-invalid"><lightning:icon class="status-icon-invalid" iconName="utility:error" size="xx-small"></lightning:icon><label>{!connection.status}</label></td>
+										<aura:set attribute="else">
+											<td class="column-pending"><lightning:icon class="status-icon-warning" iconName="utility:warning" size="xx-small"></lightning:icon><label>{!connection.status}</label></td>
+										</aura:set>
+									</aura:if>
+								</aura:set>
+							</aura:if>
+							<td><lightning:formattedDateTime value="{!connection.lastUsed}" year="numeric" month="numeric" day="numeric" hour="2-digit" minute="2-digit" timeZoneName="short" hour12="false" /></td>
+						</tr>
+					</aura:iteration>
+					<aura:if isTrue="{!empty(v.connectionList)}">
+						<div class="table-body-empty-content" id="table-body-empty-content">
+							<img src="/resource/Basiq_Connector__emptyTableContent" />
+							<div class="empty-content-header">No Consents active</div>
+							<div class="empty-content-title">Share the BasiqConnect > Consent link with your client, so <br /> they can give consent to sharing their data.</div>
+						</div>
+					</aura:if>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<c:errorPopUpModal isModalOpen="{!v.errorModalOpen}" title="{!v.errorTitle}" message="{!v.errorMessage}" />
+</aura:component>
