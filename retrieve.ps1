@@ -1,6 +1,6 @@
 # Run once manually: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 New-Item -ItemType directory -Path download
-sfdx force:mdapi:retrieve -s -r download -u mario@basiq.io -p "Basiq Connector"
+sfdx force:mdapi:retrieve -s -r download -u "<user-here>" -p "Basiq Connector"
 Set-Location download
 # Change extractor path if needed.
 C:\Progra~1\7-Zip\7z.exe x unpackaged.zip -aoa

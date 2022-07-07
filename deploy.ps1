@@ -1,1 +1,1 @@
-sfdx force:source:deploy -x .\package.xml -u mario@basiq.io
+sfdx force:source:deploy -x .\package.xml -u <user-here>
