@@ -4,9 +4,8 @@
 This repository is now read only and has been publicy archived.
 
 
-This project is being Open Sourced as Basiq wish to share this code as a starting point for any Salesforce developers to take on and integrate with their Salesforce instance and use the modified app to consume services from the Basiq platform - https://api.basiq.io/reference/introduction
-
 ## Salesforce App
+This project is being Open Sourced as Basiq wish to share this code as a starting point for any Salesforce developers to take on and integrate with their Salesforce instance and use the modified app to consume services from the Basiq platform - https://api.basiq.io/reference/introduction
 
 This guide helps Salesforce developers who are new to Visual Studio Code go from zero to a deployed app using Salesforce Extensions for VS Code and Salesforce CLI.
 
